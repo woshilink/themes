@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint');
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    optimize = require('gulp-minify-code')
+
 
     // Only work with new or updated files
     newer = require('gulp-newer'),
@@ -48,6 +48,7 @@ gulp.task('javascript', function() {
     .pipe(uglify())
     .pipe(gulp.dest(js));
 });
+
 
 // Watch everything
 gulp.task('watch', function() {
