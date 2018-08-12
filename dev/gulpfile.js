@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     jshint = require('gulp-jshint');
     concat = require('gulp-concat'),
-  uglify   = require('gulp-uglify'),
+    uglify = require('gulp-uglify'),
+    optimize = require('gulp-minify-code')
 
     // Only work with new or updated files
     newer = require('gulp-newer'),
