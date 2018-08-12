@@ -1,4 +1,4 @@
-var themename = 'vincit';
+var themename = 'vincit_coffee';
 
 var gulp = require('gulp'),
     // Prepare and optimize code etc
@@ -32,7 +32,7 @@ gulp.task('css', function() {
         indentWidth: '1'
     }).on('error', sass.logError))
     .pipe(postcss([
-        autoprefixer('last 2 versions', '&gt; 1%')
+        autoprefixer()
     ]))
     .pipe(sourcemaps.write(scss + 'maps'))
     .pipe(gulp.dest(root));
