@@ -165,6 +165,65 @@ process
       <?php next_post_link(); ?>
        
        
+   11. Blog homepage
+       -------------create home.php
+       -------------create blog on pages
+       -------------Set post page to blog on Appearance
+       -------------Add blog page to Menus
+       ---Don't 
+       class name : avatar
+       
+      -------------Codex Reference
+          --the_excerpt() --- cut the content off at some point and only display a small part of content.
+                 (https://developer.wordpress.org/reference/functions/the_excerpt/)
+          -- get_avatar()
+              (https://codex.wordpress.org/Function_Reference/get_avatar)
+          -- get_the_author_meta()
+              (https://developer.wordpress.org/reference/functions/get_the_author_meta/)
+          -- the_author_posts_link()
+              (https://codex.wordpress.org/Function_Reference/the_author_posts_link)
+          -- the_category()--- this tag is altomatically create link
+              (https://codex.wordpress.org/Function_Reference/the_category)
+          -- the_date()
+              (https://codex.wordpress.org/Function_Reference/the_date)
+          -- the_time()
+              (https://codex.wordpress.org/Function_Reference/the_time)
+          -- the_post_thumbnail()
+              (https://developer.wordpress.org/reference/functions/the_post_thumbnail/)
+            
+            <article>
+             <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></h1>
+             <h2><?php echo strip_tags( get_the_excerpt() ); ?></h2> // echo strip_tags gets rid  of <p> inside <h2>
+             ///// to limit the excerpt charactor go to function.php and add
+                   function wpt_excerpt_length($length) {
+                    return 16;
+                   }
+                   add_filter( 'excerpt_length', 'wpt_excerpt_length', 999 );
+             /////
+                <ul>
+                   <li>
+                   <a href="">
+                       <span class="wpt-avatar small">
+                        <?php echo get_avatar( get_the_author_metal('ID'), 24 ); ?>
+                       </span>
+                       by <?php the_author_posts_link(); ?>  
+                   </a> 
+                   </li>
+                   <li class="cat">in <?php the_category(', '); ?></li> ///(', ') is prevent category echo out in a <li>
+                   <li class="date">on <?php the_time('F j, Y'); ?></li> /// avoid using the_date(); because it just work on the first post
+                </ul>
+                
+                ////if it has post thumbnail
+                <?php if( get_the_post_thumbnail() ); ?> ///get need to be added when run conditional statement
+                   <div class="img-container">
+                       <?php the_post_thumbnail('large'): ?>
+                   </div>
+                <?php endif; ?>
+                
+            </article>
+   
+   
+       
 // Resources
 - WP coding standards
   https://make.wordpress.org/core/handbook/best-practices/coding-standards
