@@ -201,13 +201,13 @@ process
                    add_filter( 'excerpt_length', 'wpt_excerpt_length', 999 );
              /////
                 <ul>
-                   <li>
-                   <a href="">
+                   <li class="author">
+                   
                        <span class="wpt-avatar small">
-                        <?php echo get_avatar( get_the_author_metal('ID'), 24 ); ?>
+                        <?php echo get_avatar( get_the_author_metal('ID'), 24 ); ?> /// already contains link to author page
                        </span>
                        by <?php the_author_posts_link(); ?>  
-                   </a> 
+                  
                    </li>
                    <li class="cat">in <?php the_category(', '); ?></li> ///(', ') is prevent category echo out in a <li>
                    <li class="date">on <?php the_time('F j, Y'); ?></li> /// avoid using the_date(); because it just work on the first post
@@ -221,7 +221,53 @@ process
                 <?php endif; ?>
                 
             </article>
-   
+    
+    
+    12.  single.php page (single-post.php)
+         - home.php as a starting page.
+         - reorganise the template hirachy.
+         - add comment section by comment template function
+           (https://developer.wordpress.org/reference/functions/comments_template/)#
+           <?php comments_template(); ?>
+           
+         - or can create comments.php >>  wp will automatically use the file for the comment area.
+         
+     13. archive.php
+         - That will automatically control archives for author pages, categories,custom post types, custom taxonomies, dates, and tag    archives.
+         - home.php as a starting page.
+         - leave the loop
+         - above loop add 
+         
+           <div class="leader">
+            <h1><?php wp_title(''); ?>Blog Posts</h1>
+           </div>
+  
+  
+     14. Static homepage  front-page.php
+         (https://codex.wordpress.org/Function_Reference/is_front_page)
+         
+         - start with index.php
+         - content-portfolio.php /// component for portfolio area
+           place the custom loop from portfolio.php
+           - add <?php get_tempalte_part('content', 'portfolio'); ?>
+           - limit the number of post display,
+           - inside content-portfolio.php add on top of the first <?php ?> code
+           
+                $num_posts = -1; // all post
+                if( is_front_page() ) $num_posts = 4 // if it is front-page show only 4 post 
+                
+                //simplify format 
+                $num_posts = ( is_front_page() ) ? 4 : -1;
+                
+                /////in conclusion//////
+                <?php
+                 $num_posts = (is_front_page() ) ? 4 : -1;
+                 $args = array(
+                  'post_type' => 'portfolio',
+                  'posts_per_page' => $num_posts
+                 );
+                 $query = new WP_Query( $args );
+                ?>
    
        
 // Resources
