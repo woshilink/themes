@@ -64,7 +64,7 @@ process
     <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
      // content
     <?php endwhile; else : ?>
-      <p><?php esc_html_e( 'Sorry, no posts matched your criteria.' ); ?></p>
+      <p><?php esc_html_e( 'Sorry, no posts matched your criteria.', 'theme-name' ); ?></p>
     <?php endif; ?>
     
     
@@ -104,7 +104,7 @@ process
        function register_theme_menus() {
         register_nav_menus(
          array(
-          'primary-menu' =>__('Primary Menu')
+          'primary-menu' =>__('Primary Menu', 'theme-name')
          )
         );
        }
@@ -328,10 +328,23 @@ process
            
            - on wp_confif.php
              at define('WP_DEBUG', false); << change false to true will show the error on the page once display
-       
+           
+           - theme check plugin 
+             https://wordpress.org/plugins/theme-check/
+             
+             
+          20. Post class <?php post_class('post')
+              replace  with class="post"
+          
 // Resources
 - WP coding standards
   https://make.wordpress.org/core/handbook/best-practices/coding-standards
 - Loops (https://codex.wordpress.org/The_Loop)
 - Function ref (https://codex.wordpress.org/Function_Reference)
+- testing
+  https://codex.wordpress.org/Theme_Development_Checklist
+  https://codex.wordpress.org/Theme_Development
+  https://codex.wordpress.org/Theme_Unit_Test
+  https://make.wordpress.org/themes/handbook/review/
+  
 ```
