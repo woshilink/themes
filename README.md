@@ -42,7 +42,7 @@ process
 
    -----at header.php------
    
-   - <title><?php wp_title(); ?></title>
+   - <title><?php wp_title('|', true, 'right'); bloginfo('name') ?></title>
    - remove ref for css and js put in <?php wp_head(); ?> at the end of head tag.
    - get url of the site <?php bloginfo('url); ?>
    - get the output of the site <?php bloginfo('url); ?>
@@ -268,7 +268,66 @@ process
                  );
                  $query = new WP_Query( $args );
                 ?>
-   
+         
+        15. Setting the blog page as a home page, front-page.php will override home.php so get rid of front-page.php first.
+        
+        16. Widget area
+            https://codex.wordpress.org/Function_Reference/register_sidebar
+            https://developer.wordpress.org/reference/functions/get_sidebar/
+            https://codex.wordpress.org/Function_Reference/dynamic_sidebar
+            
+            - to make the sidebar widgets working
+              1. function.php before the wpt_theme_styles()
+                 
+                 function wpt_create_widget( $same, $id, $description) {
+                   register_sidebar(array(
+                    'name' => __( $name ),
+                    'id' => $id,
+                    'description' => __( $description ),
+                    'before_widget' => '<div class="widget">',
+                    'after_widget' => '</div>',
+                    'before_title' => '<h2 class="module-heading">',
+                    'after_title' => </h2>'
+                   ));
+                 }
+                 create_widget( 'Page Sidebar', 'page', 'Display on the side of page with a sidebar' );
+                 create_widget( 'Blog Sidebar', 'blog', 'Display on the side of pages in the blog section' );
+                 
+                 
+                 //after than in clude <?php get_sidebar(); ?>  to the template that need it.
+                 
+          17. sidebar.php 
+              -paste the sidebar code
+                <div class="small-12 medium-4 medium-pull-8 columns">
+                  <div class="secondary">
+                   //add  widget here
+                    <?php if( !dynamic_sidebar('page') ): ?>
+                     <h2 class="module-heading">Sidebar Setup</h2>
+                     <p>Please add widgets via the admin area!</p>
+                    <?php endif; ?>
+                  </div>
+                </div>
+                
+                // sidebar-page.php <<< will use specificall with page section
+                
+              <div class="small-12 medium-4 medium-pull-8 columns">
+                  <div class="secondary">
+                   //add  widget here
+                    <?php if( !dynamic_sidebar('blog') ): ?>
+                     <h2 class="module-heading">Sidebar Setup</h2>
+                     <p>Please add widgets via the admin area!</p>
+                    <?php endif; ?>
+                  </div>
+                </div>
+                
+                
+           18. Adding Shortcodes to the theme 
+               (https://wordpress.org/plugins/easy-foundation-shortcodes/)
+               
+           19. Testing wp theme
+           
+           - on wp_confif.php
+             at define('WP_DEBUG', false); << change false to true will show the error on the page once display
        
 // Resources
 - WP coding standards
