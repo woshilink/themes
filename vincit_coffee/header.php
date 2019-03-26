@@ -22,37 +22,10 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'vincit_coffee' ); ?></a>
+	<!-- <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'vincit_coffee' ); ?></a> -->
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$vincit_coffee_description = get_bloginfo( 'description', 'display' );
-			if ( $vincit_coffee_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $vincit_coffee_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'vincit_coffee' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
+	<header id="masthead" class="bg-dark">
+		<div class="text-center"><img src="http://localhost:8080/vincit/wp-content/uploads/2018/08/white-logo.png" width="100" alt="vincit-logo" class="p-2"></div>
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

@@ -12,6 +12,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
 
 
+
+
     // Only work with new or updated files
     newer = require('gulp-newer'),
 
@@ -19,13 +21,13 @@ var gulp = require('gulp'),
     root = '../' + themename + '/',
     scss = root + 'sass/',
     js = root + 'js/',
-  srcjs = root + 'srcjs/',
+
     languages = root + 'languages/';
 
 
 // CSS via Sass and Autoprefixer
 gulp.task('css', function() {
-    return gulp.src(scss + '{style.scss,rtl.scss}')
+    return gulp.src( scss + '{style.scss,rtl.scss}')
     .pipe(sourcemaps.init())
     .pipe(sass({
         outputStyle: 'expanded',
@@ -37,11 +39,13 @@ gulp.task('css', function() {
     ]))
     .pipe(sourcemaps.write(scss + 'maps'))
     .pipe(gulp.dest(root));
+
+
 });
 
 // JavaScript
 gulp.task('javascript', function() {
-    return gulp.src([srcjs + '*.js'])
+    return gulp.src( js + '{customizer.js,navigation.js, skip-link-focus-fix.js}')
     .pipe(jshint())
     .pipe(jshint.reporter('fail'))
     .pipe(concat('theme.js'))
@@ -58,7 +62,8 @@ gulp.task('watch', function() {
         port: 8080
     });
     gulp.watch([root + '**/*.css', root + '**/*.scss' ], ['css']);
-    gulp.watch(srcjs + '**/*.js', ['javascript']);
+    gulp.watch([root + '**/*.js', root + '**/*.js' ], ['javascript']);
+
     gulp.watch(root + '**/*').on('change', browserSync.reload);
 });
 
